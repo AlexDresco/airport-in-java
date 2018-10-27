@@ -3,9 +3,10 @@ import java.util.ArrayList;
 public class Airport {
     ArrayList<Plane> storage = new ArrayList<Plane>();
     Weather weather = new Weather();
+    int capacity = 20;
 
     public String land(Plane plane){
-        if (weather.isSunny()){
+        if (weather.isSunny() && storage.size() < capacity){
         storage.add(plane);
         return "Plane has landed";}
         else {
@@ -21,8 +22,4 @@ public class Airport {
             return "Plane can't take off";
         }
     }
-
-
-
-
 }

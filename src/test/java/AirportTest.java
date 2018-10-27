@@ -19,6 +19,8 @@ class AirportTest {
     @InjectMocks
     Airport airport;
 
+    int capacity = 20;
+
 
     @BeforeEach
     void beforeEachTest(){
@@ -52,5 +54,17 @@ class AirportTest {
     void planeCantTakeOffBadWeather(){
         when(weather.isSunny()).thenReturn(false);
         assertEquals("Plane can't take off", airport.takeOff(planeMock));
+    }
+
+    @Test
+    void airportReachedCapacity(){
+        when(weather.isSunny()).thenReturn(true);
+        int i = 0;
+        while (i < capacity){
+            airport.land(planeMock);
+            i++;
+        }
+        assertEquals("Plane can't land", airport.land(planeMock));
+        assertEquals( 20, airport.storage.size() );
     }
 }
